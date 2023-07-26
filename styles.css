@@ -1,0 +1,250 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Optien', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./images/bg.jpg'); /* Replace with your background image path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    z-index: -1;
+    animation: fadeInBackground 1s ease forwards;
+}
+
+@keyframes fadeInBackground {
+    to {
+        opacity: 1;
+    }
+}
+
+.rainbow-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+        #ff0000 0%, #ff4b2b 15%, #ff7819 30%, #ffae00 45%, 
+        #dfff00 60%, #7fff00 75%, #00ff2d 90%, #00ff80 105%, 
+        #00ffed 120%, #0d98ff 135%, #3c00ff 150%, #9d00ff 165%, 
+        #ff00e3 180%, #ff007d 195%, #ff0000 210%);
+    background-size: 300% 300%;
+    animation: gradientAnimation 20s ease infinite;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+@keyframes gradientAnimation {
+    0%, 100% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.logo-container {
+    position: relative;
+}
+
+
+.logo {
+    width: auto;
+    height: auto;
+    transition: transform 0.2s; /* Add transition for the hovering effect */
+    animation: popOut 0.2s ease;
+}
+
+
+@keyframes popOut {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    40% {
+        transform: scale(1.2) rotate(5deg);
+    }
+    80% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.logo-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.logo-container:hover .logo-dropdown {
+    visibility: visible;
+    opacity: 1;
+}
+
+.logo-dropdown .circle-container {
+    display: flex;
+}
+
+.logo-dropdown .circle {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 10px;
+    font-size: 24px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* Colors for the circles */
+.logo-dropdown .circle.circle-reddit {
+    background-color: #000066; /* Orange */
+}
+
+.logo-dropdown .circle.circle-discord {
+    background-color: #000066; /* Blurple */
+}
+
+.logo-dropdown .circle.circle-contact {
+    background-color: #000066; /* Green */
+}
+
+/* Hover effects for each circle */
+.logo-dropdown .circle.circle-reddit:hover {
+    transform: scale(1.1);
+    background-color: #FF5700; /* Hover color: Darker orange */
+}
+
+.logo-dropdown .circle.circle-discord:hover {
+    transform: scale(1.1);
+    background-color: #5865F2; /* Hover color: Indigo */
+}
+
+.logo-dropdown .circle.circle-contact:hover {
+    transform: scale(1.1);
+    background-color: #6b00b3; /* Hover color: Darker green */
+}
+
+/* New styles for the info icon and bubble */
+.info-icon {
+    width: 22px;
+    height: 22px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #fff;
+    color: #000066;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-icon .info-bubble {
+    position: absolute;
+    bottom: 5px;
+    right: calc(100% + 10px);
+    background-color: #000066;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    display: none;
+}
+
+/* Add speech bubble-like point */
+.info-icon .info-bubble::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent #000066 transparent transparent;
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.info-icon:hover .info-bubble {
+    display: block;
+}
+
+/* Media queries for responsive logo and centered content */
+@media screen and (max-width: 768px) {
+    .logo {
+        max-height: 360px;
+    }
+
+    .centered-content {
+        height: 100vh;
+    }
+
+    .logo-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .logo-dropdown {
+        position: absolute;
+        top: calc(70% + 5px);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .logo-dropdown .circle-container {
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        max-height: 360px;
+    }
+
+    /* Adjust position for mobile devices */
+    .logo-dropdown {
+        top: calc(70% + 5px);
+    }
+}
+
+/* Rest of the CSS... */
